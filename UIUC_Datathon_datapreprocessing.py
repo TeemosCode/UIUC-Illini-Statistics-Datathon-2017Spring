@@ -9,21 +9,7 @@ from functools import reduce
 # phase, we loop through all the file names (saved into a list) and reading them into the pandas DataFrame one at a 
 # time while joining them based on the "DATE" column.
 
-# # Initialize an empty DataFrame object to build up into a complete dataframe with all needed features through merging other feature dataframes
-# df = pd.DataFrame()
-# # locate the directory path where the data are located on the local machine
-# wd = os.path.abspath('FeatureData')
-# # find all the data in csv format under the located directory and save them as a list variable
-# all_files = glob.glob(wd + '/*.csv')
-# # Open all the csv feature data as a Pandas DataFrame and saving it inside a list variable
-# df_list = [pd.read_csv(file) for file in all_files]
-# # Merge all feature dataframes into one single Pandas DataFrame (The previous intialized DataFrame)
-# df = reduce(lambda df1, df2: pd.merge(df1,df2,on="DATE"), df_list)
-# df
-
-
-
-# Thus, the following is a new way of joining our data into one single dataframe object.
+# The following is a new way of joining our data into one single dataframe object.
 # Find all names of our data files in csv format (all csv data has the format of 2 columns, 1st column being DATE, 
 # Second column being the feature we believe that is important for our model). In order to merge all these seperate
 # featrue values into a single csv (pandas DataFrame) file for futher data cleaning and processing before the modeling,
@@ -109,4 +95,37 @@ for i in range(len(df_list)):
 # save the dataframe from memory to local disk as "AllFeaturesData.csv"
 df.to_csv("AllFeaturesData.csv", index = False)
 
+
+
+# Adding in the target variable to the main data file.
+# To do so we append the 2 feature files of training and testing dataset, appending testing data set after the training
+# data set so that the DATE order aligns with the main merged feature data file.
+
+# read in the csv file we which we used OpenRefine to change all string representation of numbers to numeric data
+df = pd.read_csv("AllFeaturesData-csv.csv")
+
+# change into the directory where the Testing and Training data are located
+wd = os.path.abspath("TrainTestingData")
+# save all the excel (.xlsm) files in the files_list
+files_list = glob.glob( wd + '/*.xlsm')
+# Individually pick out the training and testing dataset
+files_list[1] # Training dataset with DATES from (1992/01/01 ~ 2015/12/01)
+files_list[0] # Testing Dataset with DATES from (2016/01/01 ~ 2017/12/01)
+# read them into dataframes
+df_train = pd.read_excel(files_list[1])
+df_test = pd.read_excel(files_list[0])
+# Instantiate an empty dataframe used to append both training and testing data set to it to extract the target variable's
+# value as pandas series object for merging into the main dataframe later
+df_main = pd.DataFrame()
+df_main = df_main.append(df_train)
+df_main = df_main.append(df_test)
+# reindex to to get rid of duplicated index so we can merge the needed feature column to the main dataframe
+df_main = df_main.reset_index()
+# Merge it into the main dataframe, and change its type to integer
+df[df_main.columns[2]] = df_main[df_main.columns[2]]
+map(int,df[df_main.columns[2]])
+
+
+# Save dataframe to "AllFeaturesData-csv.csv", ommitting its index
+df.to_csv("AllFeaturesData-csv.csv", index = False)
 
