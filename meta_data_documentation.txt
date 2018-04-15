@@ -1,0 +1,28 @@
+Data Source: -(ALL the data are in the order of DATE’s (year/month/day) being 1992/01/01 ~ 2017/12/01)-
+
+
+LAYOUT: Column_Names,Meaning,UNITS,Additional_Explaination
+
+ASPNHSUS,Average Sales Price for New Houses Sold in the United States, Dollars,   ***
+UNRATE,Civilian Unemployment Rate,Percent,  **** XXX
+USACPIHOUMINMEI,CPI (Consumer Price Index),Index 2010=100,Not Seasonally Adjusted  ????
+FEDFUNDS,Effective Federal Funds Rate,Percentage  ******
+CSUSHPINSA,S&P-Case-Shiller U.S. National Home Price Index,Index Jan 2000=100,Not Seasonally Adjusted  ?????
+MSPNHSUS,Median Sales Price for New Houses Sold in the United States,Dollars,  *****
+MSACSR,Monthly_Supply_of_Houses,Months, ??????
+MORTGAGE30US,Mortgage,Percentage, *******
+NHFSEPUC,New Houses for Sale by Stage of Construction,Thousands,Under Construction  ******
+NHSDPC,New Houses Sold by Stage of Construction,Thousands,Completed  ******
+NHSDPNS,New Houses Sold by Stage of Construction,Thousands,Not Started  *******
+HNFSEPUSSA,New One Family Homes for Sale in the United States,Thousands,for Sale  ******
+HSN1F,New One Family Houses Sold,Thousands,Sold   ******
+DSPIC96,Real disposable income,Billion   *******
+TOTALSA,Total Vehicle Sales,Millions    ————
+DATE,Date,Date,in the format of “DD/MM/YY”  
+DIFSRC1Q027SBEA,Personal consumption  expenditures:Financial services and insurance,Billions,Financial services and insurance  *******
+W774RC1Q027SBEA,Saving and investment-Disaster losses-Private Households and institutions,Billions,Quarterly   ******
+Sales in $MM,Total Sales,Millions  ———>  billion
+
+1 million = 0.001 billion; 1 billion = 1000 million
+1 Billion = 1000000 Thousand
+1000000000 = 1 billion
